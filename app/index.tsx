@@ -1,10 +1,10 @@
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import tw from "twrnc";
 import { Image } from "expo-image";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Index() {
-  const { isPending, error, data } = useQuery({
+  const { isPending, error, data, refetch } = useQuery({
     queryKey: ["catfact"],
     queryFn: () =>
       fetch("https://catfact.ninja/fact").then((res) => res.json()),
@@ -34,6 +34,17 @@ export default function Index() {
       />
       <View style={tw`m-4`}>
         <DataComponent />
+        <Pressable
+          style={tw`bg-teal-500 rounded-xl px-4 py-4 mt-4`}
+          onPress={() => {
+            refetch();
+          }}
+          disabled={isPending}
+        >
+          <Text style={tw`text-lg text-center  text-teal-50`}>
+            {isPending ? "Loading..." : "Refresh"}
+          </Text>
+        </Pressable>
       </View>
     </View>
   );
