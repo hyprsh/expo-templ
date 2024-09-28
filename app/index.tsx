@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
 import { ActivityIndicator, Text, View } from "react-native";
 import tw from "twrnc";
 import { Image } from "expo-image";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Index() {
   const { isPending, error, data } = useQuery({
@@ -10,7 +10,7 @@ export default function Index() {
       fetch("https://catfact.ninja/fact").then((res) => res.json()),
   });
 
-  const DataComponent = () => {
+  const DataComponent: React.FC = () => {
     if (isPending)
       return <ActivityIndicator color={tw.color("teal-500")} size="large" />;
     if (error)
@@ -19,7 +19,7 @@ export default function Index() {
       );
     return (
       <Text style={tw`text-gray-800 dark:text-white text-xl`}>
-        {data?.fact}
+        "{data?.fact}"
       </Text>
     );
   };
@@ -27,8 +27,8 @@ export default function Index() {
   return (
     <View style={tw`flex-1 items-center mt-20`}>
       <Image
-        style={tw`w-20 h-20 rounded-full mb-4`}
-        source="https://cataas.com/cat"
+        style={tw`w-64 h-64 rounded-full mb-4`}
+        source="https://cataas.com/cat/gif"
         contentFit="cover"
         transition={1000}
       />
