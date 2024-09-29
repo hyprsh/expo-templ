@@ -1,4 +1,11 @@
-import { ActivityIndicator, Pressable, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  RefreshControl,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import tw from "twrnc";
 import { Image } from "expo-image";
 import { useQuery } from "@tanstack/react-query";
@@ -28,7 +35,18 @@ export default function Index() {
   return (
     <>
       <Stack.Screen options={{ title: "Cat Fact" }} />
-      <View style={tw`flex-1 items-center pt-20 bg-gray-100 dark:bg-gray-900`}>
+      <ScrollView
+        style={tw`flex-1  pt-15 bg-gray-100 dark:bg-gray-900`}
+        contentContainerStyle={tw`flex-1 items-center`}
+        refreshControl={
+          <RefreshControl refreshing={isPending} onRefresh={refetch} />
+        }
+      >
+        <Text
+          style={tw`text-4xl text-center font-bold mb-4 text-gray-800 dark:text-white`}
+        >
+          Cat Fact
+        </Text>
         <Image
           style={tw`w-64 h-64 rounded-full mb-4`}
           source="https://cataas.com/cat/gif"
@@ -50,7 +68,7 @@ export default function Index() {
             </Text>
           </Pressable>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 }
