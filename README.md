@@ -1,50 +1,83 @@
-# Welcome to your Expo app 👋
+# Expo Project
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an [Expo](https://expo.dev) project built with React Native.
 
-## Get started
+## Technologies and Versions
 
-1. Install dependencies
+- **Expo**: ~51.0.28
+- **React**: 18.2.0
+- **React Native**: 0.74.5
+- **TypeScript**: ~5.3.3
+- **Tailwind CSS**: ^4.5.1 (via twrnc)
+- **React Query**: ^5.56.2 (via @tanstack/react-query)
 
+## Prerequisites
+
+- Node.js (v20.x or later)
+- npm (v10.x or later)
+- Expo CLI (v7.x or later)
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <project-directory>
+   ```
+
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Start the app
+## Running the App
 
+1. Start the Expo development server:
    ```bash
-    npx expo start
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+2. Use the Expo Go app on your iOS or Android device to scan the QR code from your terminal to open the app.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   Alternatively, you can run on a simulator or emulator:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   - For iOS Simulator:
+     ```bash
+     npx expo run:ios
+     ```
 
-## Get a fresh project
+   - For Android Emulator:
+     ```bash
+     npx expo run:android
+     ```
 
-When you're ready, run:
+## Development
 
-```bash
-npm run reset-project
-```
+- The main application code is located in the `app` directory.
+- This project uses [Expo Router](https://docs.expo.dev/router/introduction/) for navigation.
+- Styling is done using [twrnc](https://github.com/jaredh159/tailwind-react-native-classnames), a Tailwind CSS-like utility for React Native.
+- State management and server-state synchronization are handled by [React Query](https://tanstack.com/query/latest), providing powerful data-fetching and caching capabilities.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Building for Production
 
-## Learn more
+To create a production build:
 
-To learn more about developing your project with Expo, look at the following resources:
+1. For Android:
+   ```bash
+   eas build --platform android
+   ```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+2. For iOS:
+   ```bash
+   eas build --platform ios
+   ```
 
-## Join the community
+Note: You need an Expo account and EAS (Expo Application Services) set up for production builds.
 
-Join our community of developers creating universal apps.
+## Additional Resources
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Expo Documentation](https://docs.expo.dev/)
+- [React Native Documentation](https://reactnative.dev/docs/getting-started)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [twrnc Documentation](https://github.com/jaredh159/tailwind-react-native-classnames)
+- [React Query Documentation](https://tanstack.com/query/latest/docs/react/overview)
