@@ -1,14 +1,33 @@
 import { Stack } from "expo-router";
-import tw, { useDeviceContext } from "twrnc";
+import tw, { useDeviceContext, useAppColorScheme } from "twrnc";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
 export default function RootLayout() {
   useDeviceContext(tw);
+  const [colorScheme] = useAppColorScheme(tw);
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack key={tw.memoBuster}>
+      <Stack
+        key={tw.memoBuster} // Forces a re-render when the color scheme changes
+        screenOptions={{
+          headerStyle: {
+            backgroundColor:
+              colorScheme === "dark"
+                ? tw.color("gray-900")
+                : tw.color("gray-100"),
+          },
+          headerTintColor:
+            colorScheme === "dark"
+              ? tw.color("teal-500")
+              : tw.color("gray-900"),
+          headerTitleStyle: {
+            fontWeight: "bold",
+            fontSize: 24,
+          },
+        }}
+      >
         <Stack.Screen name="index" />
       </Stack>
     </QueryClientProvider>
