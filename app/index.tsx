@@ -9,7 +9,8 @@ import {
 import tw from "twrnc";
 import { Image } from "expo-image";
 import { useQuery } from "@tanstack/react-query";
-import { Stack } from "expo-router";
+import { Link, Stack } from "expo-router";
+import Button from "@/components/Button";
 
 export default function Index() {
   const { isPending, error, data, refetch } = useQuery({
@@ -56,17 +57,17 @@ export default function Index() {
         />
         <View style={tw`m-4`}>
           <DataComponent />
-          <Pressable
-            style={tw`bg-teal-500 rounded-xl px-4 py-4 mt-4`}
+          <Button
             onPress={() => {
               refetch();
             }}
             disabled={isPending}
           >
-            <Text style={tw`text-lg text-center  text-teal-50`}>
-              {isPending ? "Loading..." : "Refresh"}
-            </Text>
-          </Pressable>
+            {isPending ? "Loading..." : "Refresh"}
+          </Button>
+          <Link href="/profile" asChild>
+            <Button>Go to Profile</Button>
+          </Link>
         </View>
       </ScrollView>
     </>
