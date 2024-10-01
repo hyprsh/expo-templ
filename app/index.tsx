@@ -1,52 +1,30 @@
-import {
-  ActivityIndicator,
-  Pressable,
-  RefreshControl,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
-import { Image } from "expo-image";
-import { useQuery } from "@tanstack/react-query";
-import { Stack } from "expo-router";
-import tw from "@/lib/twrnc";
+import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { Image } from 'expo-image';
+import { useQuery } from '@tanstack/react-query';
+import { Stack } from 'expo-router';
+import tw from '@/lib/twrnc';
 
 export default function Index() {
   const { isPending, error, data, refetch } = useQuery({
-    queryKey: ["catfact"],
-    queryFn: () =>
-      fetch("https://catfact.ninja/fact").then((res) => res.json()),
+    queryKey: ['catfact'],
+    queryFn: () => fetch('https://catfact.ninja/fact').then((res) => res.json()),
   });
 
   const DataComponent: React.FC = () => {
-    if (isPending)
-      return <ActivityIndicator color={tw.color("teal-500")} size="large" />;
-    if (error)
-      return (
-        <Text style={tw`text-red-500 text-xl`}>Error: {error.message}</Text>
-      );
-    return (
-      <Text style={tw`text-gray-800 dark:text-white text-xl`}>
-        "{data?.fact}"
-      </Text>
-    );
+    if (isPending) return <ActivityIndicator color={tw.color('teal-500')} size="large" />;
+    if (error) return <Text style={tw`text-red-500 text-xl`}>Error: {error.message}</Text>;
+    return <Text style={tw`text-gray-800 dark:text-white text-xl`}>"{data?.fact}"</Text>;
   };
 
   return (
     <>
-      <Stack.Screen options={{ title: "Cat Fact" }} />
+      <Stack.Screen options={{ title: 'Cat Fact' }} />
       <ScrollView
         style={tw`flex-1  pt-15 bg-gray-100 dark:bg-gray-900`}
         contentContainerStyle={tw`flex-1 items-center`}
-        refreshControl={
-          <RefreshControl refreshing={isPending} onRefresh={refetch} />
-        }
+        refreshControl={<RefreshControl refreshing={isPending} onRefresh={refetch} />}
       >
-        <Text
-          style={tw`text-4xl text-center font-bold mb-4 text-gray-800 dark:text-white`}
-        >
-          Cat Fact
-        </Text>
+        <Text style={tw`text-4xl text-center font-bold mb-4 text-primary-500 dark:text-white`}>Cat Fact</Text>
         <Image
           style={tw`w-64 h-64 rounded-full mb-4`}
           source="https://cataas.com/cat/gif"
@@ -63,9 +41,7 @@ export default function Index() {
             }}
             disabled={isPending}
           >
-            <Text style={tw`text-lg text-center  text-teal-50`}>
-              {isPending ? "Loading..." : "Refresh"}
-            </Text>
+            <Text style={tw`text-lg text-center  text-teal-50`}>{isPending ? 'Loading...' : 'Refresh'}</Text>
           </Pressable>
         </View>
       </ScrollView>

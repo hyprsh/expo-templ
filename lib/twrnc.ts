@@ -1,4 +1,4 @@
-import * as twrnc from "twrnc";
+import * as twrnc from 'twrnc';
 
 const tw = twrnc.create(require(`../tailwind.config.js`));
 
