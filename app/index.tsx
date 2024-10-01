@@ -5,43 +5,49 @@ import { Stack } from 'expo-router';
 import tw from '@/lib/tailwind';
 
 export default function Index() {
-  const { isPending, error, data, refetch } = useQuery({
+  const fact = useQuery({
     queryKey: ['catfact'],
     queryFn: () => fetch('https://catfact.ninja/fact').then((res) => res.json()),
   });
-
-  const DataComponent: React.FC = () => {
-    if (isPending) return <ActivityIndicator color={tw.color('teal-500')} size="large" />;
-    if (error) return <Text style={tw`text-red-500 text-xl`}>Error: {error.message}</Text>;
-    return <Text style={tw`text-gray-800 dark:text-white text-xl`}>"{data?.fact}"</Text>;
-  };
+  const image = useQuery({
+    queryKey: ['catimage'],
+    queryFn: () => fetch('https://cataas.com/cat/gif?type=small&position=center').then((res) => res.json()),
+  });
 
   return (
     <>
       <Stack.Screen options={{ title: 'Cat Fact' }} />
       <ScrollView
-        style={tw`flex-1  pt-15 bg-gray-100 dark:bg-gray-900`}
+        style={tw`flex-1  pt-15`}
         contentContainerStyle={tw`flex-1 items-center`}
-        refreshControl={<RefreshControl refreshing={isPending} onRefresh={refetch} />}
+        refreshControl={
+          <RefreshControl
+            refreshing={fact.isPending}
+            onRefresh={() => {
+              fact.refetch();
+              image.refetch();
+            }}
+          />
+        }
       >
-        <Text style={tw`text-4xl text-center font-bold mb-4 text-primary-500 dark:text-white`}>Cat Fact</Text>
+        <Text style={tw`text-4xl text-center font-bold mb-4 text-primary-500 dark:text-dark-200`}>Cat Fact</Text>
         <Image
           style={tw`w-64 h-64 rounded-full mb-4`}
-          source="https://cataas.com/cat/gif"
+          source={`https://cataas.com/cat/${image.data?._id}`}
           contentFit="cover"
           transition={1000}
           cachePolicy="none"
         />
         <View style={tw`m-4`}>
-          <DataComponent />
           <Pressable
             style={tw`bg-teal-500 rounded-xl px-4 py-4 mt-4`}
             onPress={() => {
-              refetch();
+              fact.refetch();
             }}
-            disabled={isPending}
           >
-            <Text style={tw`text-lg text-center  text-teal-50`}>{isPending ? 'Loading...' : 'Refresh'}</Text>
+            <Text style={tw`text-lg text-center  text-teal-50`}>
+              {fact.isPending ? 'Loading...' : 'Refresh'} {image.data?._id}
+            </Text>
           </Pressable>
         </View>
       </ScrollView>

@@ -13,16 +13,19 @@ export default function RootLayout() {
         key={tw.memoBuster} // Forces a re-render when the color scheme changes
         screenOptions={{
           headerStyle: {
-            backgroundColor: colorScheme === 'dark' ? tw.color('gray-900') : tw.color('gray-100'),
+            backgroundColor: colorScheme === 'dark' ? tw.color('dark-900') : tw.color('dark-100'),
           },
-          headerTintColor: colorScheme === 'dark' ? tw.color('teal-500') : tw.color('gray-900'),
+          headerTintColor: colorScheme === 'dark' ? tw.color('dark-100') : tw.color('dark-900'),
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontWeight: 'regular',
             fontSize: 24,
+          },
+          contentStyle: {
+            backgroundColor: colorScheme === 'dark' ? tw.color('dark-900') : tw.color('dark-100'),
           },
         }}
       >
-        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="index" options={{ headerShown: true }} />
       </Stack>
     </QueryClientProvider>
   );
