@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import tw, { useDeviceContext, useAppColorScheme } from '@/lib/twrnc';
+import tw, { useDeviceContext, useAppColorScheme } from '@/lib/tailwind';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();

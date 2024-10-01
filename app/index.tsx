@@ -2,7 +2,7 @@ import { ActivityIndicator, Pressable, RefreshControl, ScrollView, Text, View } 
 import { Image } from 'expo-image';
 import { useQuery } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
-import tw from '@/lib/twrnc';
+import tw from '@/lib/tailwind';
 
 export default function Index() {
   const { isPending, error, data, refetch } = useQuery({
