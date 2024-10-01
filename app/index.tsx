@@ -6,10 +6,10 @@ import {
   Text,
   View,
 } from "react-native";
-import tw from "twrnc";
 import { Image } from "expo-image";
 import { useQuery } from "@tanstack/react-query";
 import { Stack } from "expo-router";
+import tw from "@/lib/twrnc";
 
 export default function Index() {
   const { isPending, error, data, refetch } = useQuery({
